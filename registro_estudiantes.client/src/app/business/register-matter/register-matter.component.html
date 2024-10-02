@@ -1,0 +1,9 @@
+<div class="materias-container">
+  <h2>Materias disponibles</h2>
+  <ul>
+    <li *ngFor="let materia of materias">
+      {{ materia.nombre }} - {{ materia.creditos }} créditos
+      <button (click)="seleccionarMateria(materia)">Registrar</button>
+    </li>
+  </ul>
+</div>

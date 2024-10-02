@@ -19,6 +19,7 @@ export class LoginComponent {
   }
 
   login(): void {
+    console.log("usuarui" + this.username + this.password);
     this.authService.login(this.username, this.password).subscribe({
       next: () => this.router.navigate(['/dashboard']),
       error: (err) => alert('Usuario o contraseña incorrectos')

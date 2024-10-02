@@ -2,24 +2,39 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
+import { environment } from '../..//environments/environment';
+import * as  jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private LOGIN_URL = "direccion Post";
+  private LOGIN_URL = `${environment.apiUrl}/api/Login/login`;
   private tokenKey = "AuthToken";
   constructor(private httpClient: HttpClient, private router: Router) { }
 
-  login(user: string, password: string): Observable<any> {
-    return this.httpClient.post<any>(this.LOGIN_URL, { user, password }).pipe(
+  login(username: string, password: string): Observable<any> {
+    const requestBody = { username, password }; 
+    return this.httpClient.post<any>(this.LOGIN_URL, requestBody).pipe(
       tap(response => {
         if (response.token) {
-          this.setToken(response.token); // Guarda el token en el localStorage
-          console.log(response.token);
+          this.setToken(response.token);
+          const token = response.token;
+          const decoded: any = jwt_decode.jwtDecode(response.token);
+          const user = decoded.UserId; 
+          localStorage.setItem('user', JSON.stringify(user));        
         }
       })
     );
+  }
+
+  getUser() {
+    if (typeof window !== 'undefined') {     
+      return localStorage.getItem('user');
+    }
+    else {      
+      return 0;
+    }
   }
 
   private setToken(token: string): void {
@@ -27,7 +42,12 @@ export class AuthService {
   }
 
   private getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem(this.tokenKey);
+    }
+    else {
+      return null;
+    }
   }
 
   isAutenticated(): boolean {
@@ -42,6 +62,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem(this.tokenKey);
+    localStorage.removeItem('user');      
     this.router.navigate(['/login']);
   }
 }
