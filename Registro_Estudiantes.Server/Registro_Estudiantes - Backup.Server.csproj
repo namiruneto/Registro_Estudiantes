@@ -11,12 +11,10 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
-    <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy">
       <Version>8.*-*</Version>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.2" />
+    <PackageReference Include="MySql.EntityFrameworkCore" Version="8.0.5" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
@@ -24,11 +22,6 @@
     <ProjectReference Include="..\registro_estudiantes.client\registro_estudiantes.client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Validator\" />
-    <Folder Include="Utilities\" />
   </ItemGroup>
 
 </Project>
