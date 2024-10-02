@@ -1,0 +1,25 @@
+.class-register {
+  padding: 20px;
+}
+
+  .class-register h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .class-register ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .class-register li {
+    cursor: pointer;
+    margin: 5px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+    .class-register li:hover {
+      background-color: #f0f0f0;
+    }

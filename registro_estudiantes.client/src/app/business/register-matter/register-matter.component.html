@@ -1,9 +1,48 @@
-<div class="materias-container">
-  <h2>Materias disponibles</h2>
-  <ul>
-    <li *ngFor="let materia of materias">
-      {{ materia.nombre }} - {{ materia.creditos }} créditos
-      <button (click)="seleccionarMateria(materia)">Registrar</button>
-    </li>
-  </ul>
-</div>
+<section class="materias-container">
+  <h2>Materias Disponibles</h2>
+  <div class="card-container">
+    <div class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md" *ngFor="let matter of materias">
+      <div class="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-blue-600 to-blue-400 text-white shadow-blue-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
+        <div class="initials">
+          {{ matter.name.charAt(0) | uppercase }}
+        </div>
+      </div>
+      <div class="p-4 text-center">
+        <!-- Centrar el texto -->
+        <br />
+        <h4 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">{{ matter.name }}</h4>
+        <p class="block antialiased font-sans text-lg leading-normal font-normal text-blue-gray-600">Créditos: {{ matter.credit }}</p>
+        <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Profesor: {{ matter.nameTeacher }}</p>
+      </div>
+      <div class="border-t border-blue-gray-50 p-4">
+        <button class="register-btn" (click)="insertMatter(matter.matternId)">Registrar</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="materias-container">
+  <h2>Materias Registradas por el Estudiante</h2>
+  <div class="card-container">
+    <div class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md" *ngFor="let register of studentMatternDtos">
+      <div class="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-blue-600 to-blue-400 text-white shadow-blue-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
+        <div class="initials">
+          {{ register.name.charAt(0) | uppercase }}
+        </div>
+      </div>
+      <div class="p-4 text-center">
+        <!-- Centrar el texto -->
+        <br />
+        <h4 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">{{ register.name }}</h4>
+        <p class="block antialiased font-sans text-lg leading-normal font-normal text-blue-gray-600">Créditos: {{ register.credit }}</p>
+        <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Profesor: {{ register.nameTeacher }}</p>
+      </div>
+      <div class="border-t border-blue-gray-50 p-4">
+        <button class="cancelar-btn" (click)="deleterMatter(register.matternId)">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+

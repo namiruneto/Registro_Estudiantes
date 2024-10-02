@@ -1,0 +1,20 @@
+<div class="class-register">
+  <h2>Materias Registradas</h2>
+  <ul>
+    <li *ngFor="let subject of mattern" (click)="selectSubject(subject)">
+      {{ subject.name }}   Mostrar el nombre de la materia 
+    </li>
+  </ul>
+
+  <!--<div *ngIf="selectedSubject">
+    <h3>Detalles de la Materia: {{ selectedSubject.name }}</h3>
+    <h4>Estudiantes Registrados:</h4>
+    <ul>
+      <li *ngFor="let student of mattern">
+        {{ student.name }}
+      </li>
+    </ul>
+    <h4>Profesor Asociado:</h4>
+    <p>{{ selectedSubject.professor.name }}</p>
+  </div>-->
+</div>

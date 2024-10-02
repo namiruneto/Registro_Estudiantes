@@ -5,10 +5,17 @@ import { environment } from '../../../environments/environment.prod';
 import { AuthService } from '../../services/auth.service';
 
 
-export interface Materia {
-  materiaId: number;
-  nombre: string;
-  creditos: number;
+export interface Materia {    
+  matternId: number;
+  name: string;
+  credit: number;
+  nameTeacher: string;
+}
+
+
+export interface MateriasResponse {
+  materias: Materia[];
+  studentMatternDtos: Materia[];
 }
 
 @Component({
@@ -21,6 +28,7 @@ export interface Materia {
 
 export class RegisterMatterComponent implements OnInit {
   materias: Materia[] = [];
+  studentMatternDtos: Materia[] = [];
 
   private API_URL = `${environment.apiUrl}/api/Student/AvailableMaterial`;
 
@@ -32,20 +40,46 @@ export class RegisterMatterComponent implements OnInit {
 
   cargarMaterias(): void { 
    
-    const requestBody = { username: this.authService.getUser() };
-    console.log(requestBody);
-    this.httpClient.post<Materia[]>(this.API_URL, requestBody).subscribe(
+    const requestBody = { username: Number(this.authService.getUser()) };   
+    this.httpClient.post<MateriasResponse>(this.API_URL, requestBody).subscribe(
       (data) => {
-        this.materias = data;
+        this.materias = data.materias;
+        this.studentMatternDtos = data.studentMatternDtos;
       },
       (error) => {
         console.error('Error al cargar materias', error);
       }
     );
   }
-
-  seleccionarMateria(materia: Materia): void {
-    console.log('Materia seleccionada:', materia);
-    // Aquí puedes agregar la lógica para manejar la selección de la materia
+  
+  insertMatter(matternId: number): void {
+    const url = `${environment.apiUrl}/api/Student/RegisterMattern`;
+    const requestBody = { UserId: Number(this.authService.getUser()), MatternId: Number(matternId) };   
+    console.log(requestBody);
+    this.httpClient.post<any>(url, requestBody).subscribe(
+      (response) => {
+       alert('Materia registrada exitosamente');
+        window.location.reload();        
+      },
+      (error) => {
+        alert(error.error.message);       
+      }
+    );
   }
+
+  deleterMatter(matternId: number): void {
+    const url = `${environment.apiUrl}/api/Student/RemoveMattern`;
+    const requestBody = { UserId: Number(this.authService.getUser()), MatternId: Number(matternId) };
+    console.log(requestBody);
+    this.httpClient.delete<any>(url, { body: requestBody }).subscribe(
+      (response) => {
+        alert('Materia Cancelada');
+        window.location.reload();
+      },
+      (error) => {
+        alert(error.error.message);
+      }
+    );
+  }
+
 }

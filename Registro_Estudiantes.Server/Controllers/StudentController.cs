@@ -9,6 +9,7 @@ using Registro_Estudiantes.Server.Model.dto;
 using Registro_Estudiantes.Server.Services;
 using Microsoft.EntityFrameworkCore;
 using Registro_Estudiantes.Server.Data;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Registro_Estudiantes.Server.Controllers
 {
@@ -18,31 +19,62 @@ namespace Registro_Estudiantes.Server.Controllers
     {
 
         private readonly ApplicationDbContext _context;
+        private readonly AuthService _authService;
 
-        public StudentController(ApplicationDbContext context)
+        public StudentController(ApplicationDbContext context, AuthService authUser)
         {
             _context = context;
+            _authService = authUser;
         }
 
         [HttpPost("AvailableMaterial")]
         public IActionResult AvailableMaterial([FromBody] AvailableMaterial userLogin)
         {
-            //if (_auth.ValidateUser(userLogin))
-            //{
-            var materias = _context.Materias
-   .Select(m => new MateriaDto
-   {
-       MateriaId = m.MateriaId,
-       Nombre = m.Nombre,
-       Creditos = m.Creditos
-   }).ToList();
+            if (_authService.ValidateUser(userLogin.Username))
+            {
+                SubjectMatter matter = new SubjectMatter(_context);
+                return Ok(matter.GetMattern(userLogin.Username));
+            }
+            return null;
+        }
 
-            return Ok(materias);
+        [HttpPost("RegisterMattern")]
+        public IActionResult RegisterMattern([FromBody] RegisterMattern register)
+        {
+            if (_authService.ValidateUser(register.UserId))
+            {
+                SubjectMatter matter = new SubjectMatter(_context);
+                if (matter.RegisterMatternUser(register, out string Message))
+                {
+                    return Ok(true);
+                }
+                return BadRequest(new { message = Message });
+                
+            }
+            return BadRequest();
+        }
+
+        [HttpDelete("RemoveMattern")]
+        public IActionResult RemoveMattern([FromBody] RegisterMattern register)
+        {
+            if (_authService.ValidateUser(register.UserId))
+            {
+                SubjectMatter matter = new SubjectMatter(_context);
+                return Ok(matter.RemoveMatternUser(register));
+            }
+            return null;
+        }
 
 
-            //}
-
-            //return null;
+        [HttpPost("SignMattern")]
+        public IActionResult SignMattern([FromBody] AvailableMaterial sing)
+        {
+            if (_authService.ValidateUser(sing.Username))
+            {
+                SubjectMatter matter = new SubjectMatter(_context);
+                return Ok(matter.SignMattern(sing.Username));
+            }
+            return null;
         }
     }
 }

@@ -21,9 +21,9 @@ namespace Registro_Estudiantes.Server.Services
             return user != null; // Retorna true si se encontró un usuario
         }
 
-        public bool ValidateUser(AvailableMaterial availableMaterial)
+        public bool ValidateUser(int UserId)
         {
-            var user = _context.Users.SingleOrDefault(u => u.Id == availableMaterial.Username);
+            var user = _context.Users.SingleOrDefault(u => u.Id == UserId);
             return user != null; // Retorna trueSingleOrDefault si se encontró un usuario
         }
     }

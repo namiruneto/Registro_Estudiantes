@@ -30,6 +30,11 @@ export const routes: Routes = [
 
       },
       {
+        path: 'ClassRegister',
+        loadComponent: () => import('./business/class-register/class-register.component').then(m => m.ClassRegisterComponent),
+        canActivate: [AuthGuard]
+      },
+      {
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full'

@@ -1,26 +1,66 @@
+/* Contenedores de materias */
 .materias-container {
+  max-width: 1200px; /* Limita el ancho máximo */
+  margin: 40px auto; /* Centra horizontalmente */
   padding: 20px;
 }
 
-  .materias-container ul {
-    list-style-type: none;
-    padding: 0;
+  /* Títulos */
+  .materias-container h2 {
+    text-align: center; /* Centra el título */
+    font-size: 28px; /* Aumenta el tamaño de la fuente */
+    font-weight: bold;
+    color: #007BFF; /* Color principal */
+    margin-bottom: 30px;
   }
 
-  .materias-container li {
-    display: flex;
-    justify-content: space-between;
-    margin: 10px 0;
-  }
+/* Estilos para la cuadrícula */
+.card-container {
+  display: grid; /* Cambiar a grid */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Crear columnas responsivas */
+  gap: 20px; /* Espacio entre tarjetas */
+}
 
-  .materias-container button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
+/* Estilos para las tarjetas */
+.relative {
+  padding: 20px; /* Añadir espaciado interno */
+}
 
-    .materias-container button:hover {
-      background-color: #0056b3;
-    }
+/* Estilo para las iniciales */
+.initials {
+  font-size: 1.5rem; /* Tamaño de fuente de la inicial */
+  font-weight: bold; /* Negrita para resaltar la inicial */
+  color: white; /* Color de la inicial */
+  border-radius: 50%; /* Bordes redondeados */
+  display: flex; /* Usar flexbox para centrar */
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  width: 40px; /* Ancho del círculo */
+  height: 40px; /* Alto del círculo */
+}
+
+/* Botones */
+.register-btn {
+  background-color: #007BFF; /* Color del botón */
+  color: white; /* Color del texto */
+  padding: 10px 20px; /* Espaciado del botón */
+  border: none;
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cambia el cursor al pasar */
+  transition: background-color 0.3s; /* Transición suave */
+  width: 100%; /* Botón ocupa todo el ancho */
+}
+.cancelar-btn {
+  background-color: red; /* Color del botón */
+  color: white; /* Color del texto */
+  padding: 10px 20px; /* Espaciado del botón */
+  border: none;
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cambia el cursor al pasar */
+  transition: background-color 0.3s; /* Transición suave */
+  width: 100%; /* Botón ocupa todo el ancho */
+}
+
+  .register-btn:hover {
+    background-color: #0056b3; /* Color al pasar el mouse */
+  }

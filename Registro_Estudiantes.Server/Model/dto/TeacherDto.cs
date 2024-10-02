@@ -2,12 +2,11 @@
 
 namespace Registro_Estudiantes.Server.Model.dto
 {
-    public class MateriaDto
+    public class TeacherDto
     {
         [Key]
-        public int MateriaId { get; set; }
+        public int ProfesorId { get; set; }
         public string Nombre { get; set; }
-        public int Creditos { get; set; } 
-
+        public int Email { get; set; } 
     }
 }

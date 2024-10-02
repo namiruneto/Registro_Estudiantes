@@ -22,17 +22,18 @@ export class AuthService {
           const token = response.token;
           const decoded: any = jwt_decode.jwtDecode(response.token);
           const user = decoded.UserId; 
-          localStorage.setItem('user', JSON.stringify(user));        
+          localStorage.setItem('user', user.toString());        
         }
       })
     );
   }
 
   getUser() {
-    if (typeof window !== 'undefined') {     
-      return localStorage.getItem('user');
-    }
-    else {      
+    if (typeof window !== 'undefined') {
+      const user = localStorage.getItem('user'); // Obtiene el valor almacenado
+      console.log(user); // Imprime el valor en consola para verificación
+      return user ? parseInt(JSON.parse(user), 10) || 0 : 0; // Convierte a número o retorna 0
+    } else {
       return 0;
     }
   }
