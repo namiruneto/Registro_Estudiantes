@@ -1,6 +1,7 @@
 ﻿using Registro_Estudiantes.Server.Data;
 using Registro_Estudiantes.Server.Model.Request;
 using Registro_Estudiantes.Server.Repository;
+using System.Text;
 
 namespace Registro_Estudiantes.Server.Services
 {
@@ -16,7 +17,8 @@ namespace Registro_Estudiantes.Server.Services
         public bool ValidateUser(Login userLogin, out int IdUser)
         {
             IdUser = 0;
-            var user = _context.Users.SingleOrDefault(u => u.Username == userLogin.Username && u.Password == userLogin.Password);
+            string password = Convert.ToBase64String(Encoding.UTF8.GetBytes(userLogin.Password));
+            var user = _context.Users.SingleOrDefault(u => u.Username == userLogin.Username && u.Password == password);
             IdUser = user.Id;
             return user != null;
         }
