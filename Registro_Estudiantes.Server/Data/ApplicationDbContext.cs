@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Registro_Estudiantes.Server.Model.dto;
-using System.Collections.Generic;
 
 namespace Registro_Estudiantes.Server.Data
 {
