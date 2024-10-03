@@ -51,7 +51,8 @@ namespace Registro_Estudiantes.Server.Services
                                    {
                                        MatternId = m.MateriaId,
                                        Name = m.Nombre,
-                                       NameTeacher = p.Nombre
+                                       NameTeacher = p.Nombre,
+                                       Credit = m.Creditos
                                    }).ToList();
 
             return mattern;
@@ -114,7 +115,8 @@ namespace Registro_Estudiantes.Server.Services
                                           {
                                               MatternId = m.MateriaId,
                                               Name = m.Nombre,
-                                              NameTeacher = p.Nombre
+                                              NameTeacher = p.Nombre,
+                                              Credit = m.Creditos
                                           }).ToList();
             return matterns;
         }
@@ -132,11 +134,30 @@ namespace Registro_Estudiantes.Server.Services
 
         }
 
-        public string InfoNameStuden(int IdMattern)
+        public string InfoNameStuden(int IdStudent)
         {
-            var matterns = _context.Estudiantes.Where(x => x.EstudianteId == IdMattern).FirstOrDefault().Nombre;
-            return matterns;
+            var matterns = _context.Estudiantes.Where(x => x.EstudianteId == IdStudent).FirstOrDefault();
+            return matterns?.Nombre ?? string.Empty;
 
+        }
+
+        public List<MatternDetall> SignMatternIdStudent(int IdStudent)
+        {
+            var matterns = (from e in _context.EstudiantesMaterias
+                            join t in _context.Estudiantes on e.EstudianteId equals t.EstudianteId
+                            join u in _context.Users on t.UserId equals u.Id
+                            join m in _context.Materias on e.MateriaId equals m.MateriaId
+                            join c in _context.Clases on m.MateriaId equals c.MateriaId
+                            join p in _context.Profesores on c.ProfesorId equals p.ProfesorId
+                            where e.EstudianteId == IdStudent
+                            select new MatternDetall
+                            {
+                                MatternId = m.MateriaId,
+                                Name = m.Nombre,
+                                NameTeacher = p.Nombre,
+                                Credit = m.Creditos
+                            }).ToList();
+            return matterns;
         }
     }
 }
