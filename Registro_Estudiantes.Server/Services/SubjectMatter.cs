@@ -117,6 +117,25 @@ namespace Registro_Estudiantes.Server.Services
                                               NameTeacher = p.Nombre
                                           }).ToList();
             return matterns;
+        }
+
+        public List<MatternStudentDetall> InfoRegisterClass(int IdMattern)
+        {
+            var matterns = (from e in _context.EstudiantesMaterias
+                            join t in _context.Estudiantes on e.EstudianteId equals t.EstudianteId
+                            where e.MateriaId == IdMattern
+                            select new MatternStudentDetall
+                            {
+                               NameStudent = t.Nombre
+                            }).ToList();
+            return matterns;
+
+        }
+
+        public string InfoNameStuden(int IdMattern)
+        {
+            var matterns = _context.Estudiantes.Where(x => x.EstudianteId == IdMattern).FirstOrDefault().Nombre;
+            return matterns;
 
         }
     }

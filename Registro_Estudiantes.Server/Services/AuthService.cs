@@ -18,13 +18,13 @@ namespace Registro_Estudiantes.Server.Services
             IdUser = 0;
             var user = _context.Users.SingleOrDefault(u => u.Username == userLogin.Username && u.Password == userLogin.Password);
             IdUser = user.Id;
-            return user != null; // Retorna true si se encontró un usuario
+            return user != null;
         }
 
         public bool ValidateUser(int UserId)
         {
             var user = _context.Users.SingleOrDefault(u => u.Id == UserId);
-            return user != null; // Retorna trueSingleOrDefault si se encontró un usuario
+            return user != null;
         }
     }
 }

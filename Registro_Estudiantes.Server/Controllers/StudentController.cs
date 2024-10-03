@@ -1,15 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
+﻿using Microsoft.AspNetCore.Mvc;
 using Registro_Estudiantes.Server.Model.Request;
-using Registro_Estudiantes.Server.Model.dto;
 using Registro_Estudiantes.Server.Services;
-using Microsoft.EntityFrameworkCore;
 using Registro_Estudiantes.Server.Data;
-using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Registro_Estudiantes.Server.Controllers
 {
@@ -20,11 +12,13 @@ namespace Registro_Estudiantes.Server.Controllers
 
         private readonly ApplicationDbContext _context;
         private readonly AuthService _authService;
+        private readonly SubjectMatter matter;
 
         public StudentController(ApplicationDbContext context, AuthService authUser)
         {
             _context = context;
             _authService = authUser;
+            matter = new SubjectMatter(_context);
         }
 
         [HttpPost("AvailableMaterial")]
@@ -32,7 +26,6 @@ namespace Registro_Estudiantes.Server.Controllers
         {
             if (_authService.ValidateUser(userLogin.Username))
             {
-                SubjectMatter matter = new SubjectMatter(_context);
                 return Ok(matter.GetMattern(userLogin.Username));
             }
             return null;
@@ -43,7 +36,6 @@ namespace Registro_Estudiantes.Server.Controllers
         {
             if (_authService.ValidateUser(register.UserId))
             {
-                SubjectMatter matter = new SubjectMatter(_context);
                 if (matter.RegisterMatternUser(register, out string Message))
                 {
                     return Ok(true);
@@ -59,7 +51,6 @@ namespace Registro_Estudiantes.Server.Controllers
         {
             if (_authService.ValidateUser(register.UserId))
             {
-                SubjectMatter matter = new SubjectMatter(_context);
                 return Ok(matter.RemoveMatternUser(register));
             }
             return null;
@@ -71,8 +62,27 @@ namespace Registro_Estudiantes.Server.Controllers
         {
             if (_authService.ValidateUser(sing.Username))
             {
-                SubjectMatter matter = new SubjectMatter(_context);
                 return Ok(matter.SignMattern(sing.Username));
+            }
+            return null;
+        }
+
+        [HttpPost("InfoRegisterClass")]
+        public IActionResult InfoRegisterClass([FromBody] RegisterMattern register)
+        {
+            if (_authService.ValidateUser(register.UserId))
+            {
+                return Ok(matter.InfoRegisterClass(register.MatternId));
+            }
+            return null;
+        }
+
+        [HttpPost("InfoNameStuden")]
+        public IActionResult InfoNameStuden([FromBody] InfoStudent register)
+        {
+            if (_authService.ValidateUser(register.UserId))
+            {
+                return Ok(new { name = matter.InfoNameStuden(register.IdStudent) });
             }
             return null;
         }

@@ -25,22 +25,20 @@ namespace Registro_Estudiantes.Server.Controllers
         public IActionResult Login([FromBody] Login userLogin)
         {
             if (_authService.ValidateUser(userLogin, out int IdUser))
-            {
-                // Generar y retornar el token aquí
-                return Ok(new { Token = GenerateToken(userLogin.Username, IdUser) }); // Reemplaza con el token real
+            {               
+                return Ok(new { Token = GenerateToken(userLogin.Username, IdUser) });
             }
 
             return Unauthorized("Usuario o contraseña incorrectos.");
         }
 
         private string GenerateToken(string username, int userId)
-        {
-            // Asegúrate de que la clave tenga al menos 32 bytes
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("R2LzksP8W4qQy39cLQ1Xj8a7b0pD10f5")); // Cambia esta clave a una más segura
+        {            
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("R2LzksP8W4qQy39cLQ1Xj8a7b0pD10f5"));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var claims = new[]
-            {   new Claim(ClaimTypes.Name, username), // El nombre de usuario
+            {   new Claim(ClaimTypes.Name, username), 
                  new Claim("UserId", userId.ToString())
             };
 
@@ -48,7 +46,7 @@ namespace Registro_Estudiantes.Server.Controllers
                 issuer: null,
                 audience: null,
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(60), // Token expira en 60 minutos
+                expires: DateTime.Now.AddMinutes(60),
                 signingCredentials: creds);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
