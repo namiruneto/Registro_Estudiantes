@@ -78,11 +78,21 @@ namespace Registro_Estudiantes.Server.Controllers
         }
 
         [HttpPost("InfoNameStuden")]
-        public IActionResult InfoNameStuden([FromBody] InfoStudent register)
+        public IActionResult InfoNameStuden([FromBody] InfoStudent infoStudent)
         {
-            if (_authService.ValidateUser(register.UserId))
+            if (_authService.ValidateUser(infoStudent.UserId))
             {
-                return Ok(new { name = matter.InfoNameStuden(register.IdStudent) });
+                return Ok(new { name = matter.InfoNameStuden(infoStudent.IdStudent) });
+            }
+            return null;
+        }
+
+        [HttpPost("SignMatternIdStudent")]
+        public IActionResult SignMatternIdStudent([FromBody] InfoStudent infoStudent)
+        {
+            if (_authService.ValidateUser(infoStudent.UserId))
+            {
+                return Ok(matter.SignMatternIdStudent(infoStudent.IdStudent));
             }
             return null;
         }
