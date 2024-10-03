@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34701.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registro_Estudiantes.Server", "Registro_Estudiantes.Server\Registro_Estudiantes.Server.csproj", "{52EC6204-B42C-400A-9BD0-EA275397F732}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Registro_Estudiantes.Server", "Registro_Estudiantes.Server\Registro_Estudiantes.Server.csproj", "{52EC6204-B42C-400A-9BD0-EA275397F732}"
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "registro_estudiantes.client", "registro_estudiantes.client\registro_estudiantes.client.esproj", "{57A8AAC9-3A87-44A7-AFAE-F9EF6990E936}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registro_Estudiantes.ServerTests", "Registro_Estudiantes.ServerTests\Registro_Estudiantes.ServerTests.csproj", "{B111C730-36E9-4074-9D49-026C57060EC4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,10 @@ Global
 		{57A8AAC9-3A87-44A7-AFAE-F9EF6990E936}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57A8AAC9-3A87-44A7-AFAE-F9EF6990E936}.Release|Any CPU.Build.0 = Release|Any CPU
 		{57A8AAC9-3A87-44A7-AFAE-F9EF6990E936}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{B111C730-36E9-4074-9D49-026C57060EC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B111C730-36E9-4074-9D49-026C57060EC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B111C730-36E9-4074-9D49-026C57060EC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B111C730-36E9-4074-9D49-026C57060EC4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
