@@ -37,8 +37,7 @@ export class ClassRegisterComponent implements OnInit {
     const url = `${environment.apiUrl}/api/Student/SignMattern`;
     const requestBody = { username: Number(this.authService.getUser()) };    
     this.httpClient.post<Materia[]>(url, requestBody).subscribe(
-      (data) => {
-        console.log(data);
+      (data) => {        
         this.mattern = data;
       },
       (error) => {
@@ -59,7 +58,7 @@ export class ClassRegisterComponent implements OnInit {
           additionalData: response 
         };
         this.dialog.open(SubjectDetailsComponent, {
-          width: '600px',
+          width: 'auto',
           height: 'auto',
           maxHeight: '80vh',
           data: dataToSend
