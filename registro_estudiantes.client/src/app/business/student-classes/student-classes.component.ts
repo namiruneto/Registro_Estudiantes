@@ -46,8 +46,8 @@ export class StudentClassesComponent implements OnInit {
   }
 
   loadStudentClasses(): void {
-    const url = `${environment.apiUrl}/api/Student/SignMattern`;
-    const requestBody = { username: Number(this.studentId) };
+    const url = `${environment.apiUrl}/api/Student/SignMatternIdStudent`;
+    const requestBody = { IdStudent: Number(this.studentId), UserId: Number(this.authService.getUser()) };
     console.log(requestBody);
     this.httpClient.post<StudentClass[]>(url, requestBody).subscribe(
       (data) => {
