@@ -11,27 +11,20 @@ export const routes: Routes = [
         path: 'dashboard',
         loadComponent: () => import('./business/dashboard/dashboard.component').then(m => m.DashboardComponent),
         canActivate: [AuthGuard]
-      },
-      {
-        path: 'profile',
-        loadComponent: () => import('./business/profile/profile.component'),
-        canActivate: [AuthGuard]
-      },
-      {
-        path: 'tables',
-        loadComponent: () => import('./business/tables/tables.component'),
-        canActivate: [AuthGuard]
-
-      },
+      },     
       {
         path: 'RegistrarMateria',
         loadComponent: () => import('./business/register-matter/register-matter.component').then(m => m.RegisterMatterComponent),
         canActivate: [AuthGuard]
-
       },
       {
         path: 'ClassRegister',
         loadComponent: () => import('./business/class-register/class-register.component').then(m => m.ClassRegisterComponent),
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'StudentClasses',
+        loadComponent: () => import('./business/student-classes/student-classes.component').then(m => m.StudentClassesComponent),
         canActivate: [AuthGuard]
       },
       {

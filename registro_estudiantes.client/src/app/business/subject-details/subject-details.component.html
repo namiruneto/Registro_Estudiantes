@@ -1,0 +1,16 @@
+<div mat-dialog-content class="modal-content">
+  <h2 mat-dialog-title class="modal-title">Detalles de la materia</h2>
+  <p><strong>Nombre:</strong> {{ data.matter.name }}</p>
+  <p><strong>Créditos:</strong> {{ data.matter.credit }}</p>
+  <p><strong>Profesor:</strong> {{ data.matter.nameTeacher }}</p>
+  <br />
+  <h3><strong>Estudiantes Inscriptos</strong></h3>
+  <ul>
+    <li *ngFor="let item of data.additionalData">{{ item.nameStudent }}</li>
+  </ul>
+</div>
+<div mat-dialog-actions class="modal-actions">
+  <button mat-button (click)="onClose()" class="close-button">
+    <span class="close-icon">✖</span>
+  </button>
+</div>

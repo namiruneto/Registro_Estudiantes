@@ -12,7 +12,6 @@ export interface Materia {
   nameTeacher: string;
 }
 
-
 export interface MateriasResponse {
   materias: Materia[];
   studentMatternDtos: Materia[];

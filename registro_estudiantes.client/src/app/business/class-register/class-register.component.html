@@ -1,20 +1,20 @@
-<div class="class-register">
-  <h2>Materias Registradas</h2>
-  <ul>
-    <li *ngFor="let subject of mattern" (click)="selectSubject(subject)">
-      {{ subject.name }}   Mostrar el nombre de la materia 
-    </li>
-  </ul>
-
-  <!--<div *ngIf="selectedSubject">
-    <h3>Detalles de la Materia: {{ selectedSubject.name }}</h3>
-    <h4>Estudiantes Registrados:</h4>
-    <ul>
-      <li *ngFor="let student of mattern">
-        {{ student.name }}
-      </li>
-    </ul>
-    <h4>Profesor Asociado:</h4>
-    <p>{{ selectedSubject.professor.name }}</p>
-  </div>-->
-</div>
+<section class="materias-container">
+  <div class="card-container">
+    <div class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md" *ngFor="let matter of mattern">
+      <div class="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-blue-600 to-blue-400 text-white shadow-blue-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
+        <div class="initials">
+          {{ matter.name.charAt(0) | uppercase }}
+        </div>
+      </div>
+      <div class="p-4 text-center">      
+        <br />
+        <h4 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">{{ matter.name }}</h4>
+        <p class="block antialiased font-sans text-lg leading-normal font-normal text-blue-gray-600">Créditos: {{ matter.credit }}</p>
+        <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Profesor: {{ matter.nameTeacher }}</p>
+      </div>
+      <div class="border-t border-blue-gray-50 p-4">
+        <button class="register-btn" (click)="selectSubject(matter.matternId)">Inscritos</button>
+      </div>
+    </div>
+  </div>
+</section>

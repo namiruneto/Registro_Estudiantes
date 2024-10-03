@@ -30,9 +30,9 @@ export class AuthService {
 
   getUser() {
     if (typeof window !== 'undefined') {
-      const user = localStorage.getItem('user'); // Obtiene el valor almacenado
-      console.log(user); // Imprime el valor en consola para verificación
-      return user ? parseInt(JSON.parse(user), 10) || 0 : 0; // Convierte a número o retorna 0
+      const user = localStorage.getItem('user');
+      console.log(user); 
+      return user ? parseInt(JSON.parse(user), 10) || 0 : 0; 
     } else {
       return 0;
     }

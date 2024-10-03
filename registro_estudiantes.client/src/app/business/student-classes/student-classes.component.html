@@ -1,0 +1,28 @@
+<div class="student-classes-container">
+  <h2>Consultar Clases del Estudiante</h2>
+
+  <div class="input-container">
+    <input type="number"
+           [(ngModel)]="studentId"
+           placeholder="Ingrese el ID del estudiante"
+           class="student-id-input" />
+    <button (click)="loadStudentClasses()" class="search-button">Buscar</button>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+  <div *ngIf="studentName">
+    <h3>Nombre del Estudiante: {{ studentName }}</h3>
+  </div>
+
+  <ul *ngIf="classes.length > 0; else noClasses" class="classes-list">
+    <li *ngFor="let studentClass of classes" class="class-item">
+      <h4 class="class-name">{{ studentClass.name }}</h4>
+      <p class="class-teacher"><strong>Profesor:</strong> {{ studentClass.nameTeacher }}</p>
+    </li>
+  </ul>
+
+  <ng-template #noClasses>
+    <p>No hay clases registradas para este estudiante.</p>
+  </ng-template>
+</div>

@@ -1,0 +1,57 @@
+.materias-container {
+  max-width: 1200px; 
+  margin: 40px auto; 
+  padding: 20px;
+}
+
+  .materias-container h2 {
+    text-align: center; 
+    font-size: 28px; 
+    font-weight: bold;
+    color: #007BFF; 
+    margin-bottom: 30px;
+  }
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+  gap: 20px; 
+}
+
+.relative {
+  padding: 20px; 
+}
+
+.initials {
+  font-size: 1.5rem;
+  font-weight: bold; 
+  color: white; 
+  border-radius: 50%;
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  width: 40px;
+  height: 40px;
+}
+
+.register-btn {
+  background-color: #007BFF;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
+}
+
+.cancelar-btn {
+  background-color: red; 
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
+}

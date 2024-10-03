@@ -1,0 +1,25 @@
+/* Estilo del contenedor del modal */
+.modal-content {
+  padding: 16px; /* Espacio interno alrededor del contenido */
+}
+
+/* Estilo del botón de cerrar */
+.modal-actions {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente el contenido */
+  padding: 8px; /* Espacio alrededor del botón */
+}
+
+.close-button {
+  background-color: transparent; /* Fondo transparente */
+  border: none; /* Sin borde */
+  color: red; /* Cambiar el color de la X a rojo */
+  font-size: 2em; /* Tamaño grande para la X */
+  cursor: pointer; /* Cambia el cursor al pasar el ratón */
+  transition: transform 0.3s; /* Transición suave para la animación */
+}
+
+  /* Efecto al pasar el ratón sobre el botón */
+  .close-button:hover {
+    transform: scale(1.1); /* Aumenta el tamaño al pasar el ratón */
+  }

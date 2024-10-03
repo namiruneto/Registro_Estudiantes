@@ -1,66 +1,60 @@
-/* Contenedores de materias */
 .materias-container {
-  max-width: 1200px; /* Limita el ancho máximo */
-  margin: 40px auto; /* Centra horizontalmente */
+  max-width: 1200px;
+  margin: 40px auto;
   padding: 20px;
 }
 
-  /* Títulos */
   .materias-container h2 {
-    text-align: center; /* Centra el título */
-    font-size: 28px; /* Aumenta el tamaño de la fuente */
+    text-align: center; 
+    font-size: 28px; 
     font-weight: bold;
-    color: #007BFF; /* Color principal */
+    color: #007BFF; 
     margin-bottom: 30px;
   }
 
-/* Estilos para la cuadrícula */
 .card-container {
-  display: grid; /* Cambiar a grid */
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Crear columnas responsivas */
-  gap: 20px; /* Espacio entre tarjetas */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+  gap: 20px; 
 }
 
-/* Estilos para las tarjetas */
 .relative {
-  padding: 20px; /* Añadir espaciado interno */
+  padding: 20px; 
 }
 
-/* Estilo para las iniciales */
 .initials {
-  font-size: 1.5rem; /* Tamaño de fuente de la inicial */
-  font-weight: bold; /* Negrita para resaltar la inicial */
-  color: white; /* Color de la inicial */
-  border-radius: 50%; /* Bordes redondeados */
-  display: flex; /* Usar flexbox para centrar */
-  justify-content: center; /* Centra horizontalmente */
-  align-items: center; /* Centra verticalmente */
-  width: 40px; /* Ancho del círculo */
-  height: 40px; /* Alto del círculo */
+  font-size: 1.5rem; 
+  font-weight: bold; 
+  color: white; 
+  border-radius: 50%; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  width: 40px; 
+  height: 40px; 
 }
 
-/* Botones */
 .register-btn {
-  background-color: #007BFF; /* Color del botón */
-  color: white; /* Color del texto */
-  padding: 10px 20px; /* Espaciado del botón */
+  background-color: #007BFF; 
+  color: white; 
+  padding: 10px 20px; 
   border: none;
-  border-radius: 5px; /* Bordes redondeados */
-  cursor: pointer; /* Cambia el cursor al pasar */
-  transition: background-color 0.3s; /* Transición suave */
-  width: 100%; /* Botón ocupa todo el ancho */
+  border-radius: 5px; 
+  cursor: pointer; 
+  transition: background-color 0.3s; 
+  width: 100%; 
 }
 .cancelar-btn {
-  background-color: red; /* Color del botón */
-  color: white; /* Color del texto */
-  padding: 10px 20px; /* Espaciado del botón */
+  background-color: red; 
+  color: white; 
+  padding: 10px 20px; 
   border: none;
-  border-radius: 5px; /* Bordes redondeados */
-  cursor: pointer; /* Cambia el cursor al pasar */
-  transition: background-color 0.3s; /* Transición suave */
-  width: 100%; /* Botón ocupa todo el ancho */
+  border-radius: 5px; 
+  cursor: pointer; 
+  transition: background-color 0.3s; 
+  width: 100%; 
 }
 
   .register-btn:hover {
-    background-color: #0056b3; /* Color al pasar el mouse */
+    background-color: #0056b3; 
   }
