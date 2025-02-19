@@ -17,8 +17,9 @@ namespace Registro_Estudiantes.Server.Services
         public bool ValidateUser(Login userLogin, out int IdUser)
         {
             IdUser = 0;
-            string password = Convert.ToBase64String(Encoding.UTF8.GetBytes(userLogin.Password));
-            var user = _context.Users.SingleOrDefault(u => u.Username == userLogin.Username && u.Password == password);
+            //
+            //string password = Convert.ToBase64String(Encoding.UTF8.GetBytes(userLogin.Password));
+            var user = _context.Users.SingleOrDefault(u => u.Username == userLogin.Username && u.Password == userLogin.Password);
             IdUser = user.Id;
             return user != null;
         }

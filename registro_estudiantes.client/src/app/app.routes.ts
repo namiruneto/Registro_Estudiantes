@@ -14,17 +14,17 @@ export const routes: Routes = [
       },     
       {
         path: 'RegistrarMateria',
-        loadComponent: () => import('./business/register-matter/register-matter.component').then(m => m.RegisterMatterComponent),
-        canActivate: [AuthGuard]
-      },
-      {
-        path: 'ClassRegister',
-        loadComponent: () => import('./business/class-register/class-register.component').then(m => m.ClassRegisterComponent),
+        loadComponent: () => import('./chat/chat.component').then(m => m.ChatComponent),
         canActivate: [AuthGuard]
       },
       {
         path: 'StudentClasses',
-        loadComponent: () => import('./business/student-classes/student-classes.component').then(m => m.StudentClassesComponent),
+        loadComponent: () => import('./soport/soport.component').then(m => m.SoportComponent),
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'ClassRegister',
+        loadComponent: () => import('./expense/expense.component').then(m => m.ExpenseComponent),
         canActivate: [AuthGuard]
       },
       {

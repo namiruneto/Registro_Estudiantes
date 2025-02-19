@@ -1,0 +1,61 @@
+.support-container {
+  display: flex;
+  gap: 20px;
+}
+
+.cases-list {
+  width: 30%;
+  background: #f4f4f4;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.case-details {
+  width: 70%;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+h3 {
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 5px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  padding: 8px;
+  cursor: pointer;
+  background: #fff;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+  li:hover {
+    background: #ddd;
+  }
+
+.solution-options {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+textarea {
+  width: 100%;
+  height: 80px;
+  margin-top: 10px;
+}
+
+button {
+  background: #007bff;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}

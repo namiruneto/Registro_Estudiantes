@@ -1,0 +1,35 @@
+<div class="expense-container">
+  <h2>Resumen de Gastos</h2>
+
+  <div class="chart-container">
+    <canvas id="expenseChart"></canvas>
+  </div>
+
+  <div class="summary">
+    <p><strong>Uso del Plan Básico:</strong> {{ totalBasicUsed }}</p>
+    <p><strong>Costo Adicional:</strong> ${{ totalAdditionalCost.toFixed(2) }}</p>
+  </div>
+
+  <div class="expense-details">
+    <div class="expense-section">
+      <h3>Plan Básico</h3>
+      <ul>
+        <li *ngFor="let item of expenses">
+          {{ item.category }}: <strong>{{ getMin(item.used, item.basicLimit) }}</strong> / {{ item.basicLimit }}
+        </li>
+      </ul>
+    </div>
+
+    <div class="expense-section">
+      <h3>Consumo Adicional</h3>
+      <ul>
+        <li *ngFor="let item of expenses">
+          <span *ngIf="item.used > item.basicLimit">
+            {{ item.category }}: <strong>{{ item.used - item.basicLimit }}</strong> (Costo: ${{ ((item.used - item.basicLimit) * item.additionalCostPerUnit).toFixed(2) }})
+          </span>
+          <span *ngIf="item.used <= item.basicLimit">Sin consumo adicional</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

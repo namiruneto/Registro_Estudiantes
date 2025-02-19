@@ -1,0 +1,28 @@
+<div class="chat-container">
+  <!-- Lista de contactos -->
+  <div class="contacts-list">
+    <h3>Contactos</h3>
+    <ul>
+      <li *ngFor="let contact of contacts" (click)="selectContact(contact)">
+        <strong>{{ contact.name }}</strong>
+        <p>{{ contact.lastMessage }}</p>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Ventana de chat -->
+  <div class="chat-window" *ngIf="selectedContact">
+    <h3>Chat con {{ selectedContact.name }}</h3>
+    <div class="messages">
+      <div *ngFor="let msg of messages">
+        <p><strong>{{ msg.sender }}:</strong> {{ msg.text }} <span class="timestamp">{{ msg.timestamp }}</span></p>
+      </div>
+    </div>
+
+    <!-- Input para enviar mensajes -->
+    <div class="message-input">
+      <input #messageInput type="text" placeholder="Escribe un mensaje..." />
+      <button (click)="sendMessage(messageInput.value); messageInput.value=''">Enviar</button>
+    </div>
+  </div>
+</div>

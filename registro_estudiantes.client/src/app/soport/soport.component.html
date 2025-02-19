@@ -1,0 +1,38 @@
+<div class="support-container">
+  <div class="cases-list">
+    <h3>Casos Pendientes</h3>
+    <ul>
+      <li *ngFor="let caseItem of cases" (click)="selectCase(caseItem)">
+        {{ caseItem.title }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="case-details" *ngIf="selectedCase">
+    <h2>{{ selectedCase.title }}</h2>
+    <p><strong>Problema:</strong> {{ selectedCase.problem }}</p>
+
+    <h3>Soluciones Sugeridas</h3>
+    <ul>
+      <li *ngFor="let solution of selectedCase.suggestedSolutions; let i = index">
+        <span>{{ solution }}</span>
+        <div class="solution-options">
+          <label>
+            <input type="radio" name="solution-{{i}}" [(ngModel)]="selectedCase.solutionsStatus[solution]" value="Efectiva"> Efectiva
+          </label>
+          <label>
+            <input type="radio" name="solution-{{i}}" [(ngModel)]="selectedCase.solutionsStatus[solution]" value="No Aplicable"> No Aplicable
+          </label>
+          <label>
+            <input type="radio" name="solution-{{i}}" [(ngModel)]="selectedCase.solutionsStatus[solution]" value="Ineficaz"> Ineficaz
+          </label>
+        </div>
+      </li>
+    </ul>
+
+    <h3>Otras Soluciones Realizadas</h3>
+    <textarea [(ngModel)]="selectedCase.additionalSolutions" placeholder="Añadir otras soluciones"></textarea>
+
+    <button (click)="saveSolution()">Guardar</button>
+  </div>
+</div>
