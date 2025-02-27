@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
+import { environment } from '../../environments/environment.prod';
 
 
 interface Case {
@@ -14,6 +16,22 @@ interface Case {
   additionalSolutions: string[];
 }
 
+interface ApiResponse {
+  cases: {
+    id: number;
+    title: string;
+    problem: string;
+    appliedSolution: string;
+    activo: boolean;
+  }[];
+  solutions: {
+    id: number;
+    caseId: number;
+    solution: string;
+    status: string;
+  }[];
+}
+
 @Component({
   selector: 'app-soport',
   standalone: true,
@@ -24,37 +42,39 @@ interface Case {
 
 
 export class SoportComponent {
-  cases: Case[] = [
-    {
-      id: 1,
-      title: 'Error en la facturación',
-      problem: 'El cliente no puede generar una factura desde el sistema.',
-      suggestedSolutions: [
-        'Revisar conexión a la base de datos.',
-        'Verificar permisos del usuario.',
-        'Actualizar la versión del sistema.'
-      ],
-      solutionsStatus: {},
-      appliedSolution: '',
-      additionalSolutions: []
-    },
-    {
-      id: 2,
-      title: 'Problema con la impresión',
-      problem: 'La impresora no responde al enviar un documento.',
-      suggestedSolutions: [
-        'Verificar conexión USB o WiFi.',
-        'Reinstalar los drivers de la impresora.',
-        'Cambiar la configuración de impresión.'
-      ],
-      solutionsStatus: {},
-      appliedSolution: '',
-      additionalSolutions: []
-    }
-  ];
-
+  private API_URL = `${environment.apiUrl}/api/Student/Casos`;  
+  cases: Case[] = [];
   selectedCase: Case | null = null;
   solutionStatuses = ['Efectiva', 'No Aplicable', 'Ineficaz'];
+
+  constructor(private httpClient: HttpClient, private authService: AuthService) { }
+
+
+  ngOnInit() {
+    this.fetchCases();
+  }
+
+  fetchCases() {
+    const requestBody = { username: Number(this.authService.getUser()) };
+    this.httpClient.post<ApiResponse>(this.API_URL, requestBody).subscribe(
+      (response) => {
+        this.cases = response.cases.map((caseItem) => ({
+          id: caseItem.id,
+          title: caseItem.title,
+          problem: caseItem.problem,
+          suggestedSolutions: response.solutions
+            .filter((sol) => sol.caseId === caseItem.id)
+            .map((sol) => sol.solution),
+          solutionsStatus: {},
+          appliedSolution: caseItem.appliedSolution.trim() || '',
+          additionalSolutions: []
+        }));
+      },
+      (error) => {
+        console.error('Error al obtener los casos:', error);
+      }
+    );
+  }
 
   selectCase(caseItem: Case) {
     this.selectedCase = caseItem;
@@ -66,6 +86,21 @@ export class SoportComponent {
   }
 
   saveSolution() {
-    console.log('Solución guardada:', this.selectedCase);
+    if (!this.selectedCase) return;
+
+    this.cases = this.cases.filter((c) => c.id !== this.selectedCase?.id);
+
+    const requestBody = { username: Number(this.selectedCase?.id) };
+    console.log('Enviando solución:', requestBody);
+    this.httpClient.post(`${environment.apiUrl}/api/Student/CasosFinalizar`, requestBody).subscribe(
+      () => {
+        console.log('Mensaje de finalización enviado con éxito');
+      },
+      (error) => {
+        console.error('Error al enviar mensaje de finalización:', error);
+      }
+    );
+
+    this.selectedCase = null;
   }
 }

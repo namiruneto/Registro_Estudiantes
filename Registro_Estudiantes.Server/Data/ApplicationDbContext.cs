@@ -14,5 +14,9 @@ namespace Registro_Estudiantes.Server.Data
         public DbSet<TeacherClassDto> Clases { get; set; }
         public DbSet<Student> Estudiantes { get; set; }
         public DbSet<TeacherDto> Profesores { get; set; }
+        public DbSet<ContactsDto> Contacts { get; set; }
+        public DbSet<MessagesDto> Messages { get; set; }
+        public DbSet<CasesDto> Cases { get; set; }
+        public DbSet<CaseSolutionsDto> CaseSolutions { get; set; }
     }
 }

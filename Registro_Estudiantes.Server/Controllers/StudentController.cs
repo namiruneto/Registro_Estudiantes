@@ -2,6 +2,7 @@
 using Registro_Estudiantes.Server.Model.Request;
 using Registro_Estudiantes.Server.Services;
 using Registro_Estudiantes.Server.Data;
+using Registro_Estudiantes.Server.Model.answer;
 
 namespace Registro_Estudiantes.Server.Controllers
 {
@@ -13,13 +14,74 @@ namespace Registro_Estudiantes.Server.Controllers
         private readonly ApplicationDbContext _context;
         private readonly AuthService _authService;
         private readonly SubjectMatter matter;
+        private readonly Conversaciones conversaciones;
 
         public StudentController(ApplicationDbContext context, AuthService authUser)
         {
             _context = context;
             _authService = authUser;
             matter = new SubjectMatter(_context);
+
+            conversaciones = new Conversaciones(_context);
         }
+
+        [HttpPost("Chat")]
+        public IActionResult Chat([FromBody] AvailableMaterial userLogin)
+        {
+            if (_authService.ValidateUser(userLogin.Username))
+            {
+                return Ok(conversaciones.chat());
+            }
+            return null;
+        }
+
+        [HttpPost("EnviarMensaje")]
+        public IActionResult EnviarMensaje([FromBody] NuevoMensaje userLogin)
+        {
+            if (_authService.ValidateUser(userLogin.Username))
+            {
+                conversaciones.sendMessage(userLogin);
+                return Ok();
+            }
+            return null;
+             
+        }
+
+
+        [HttpPost("FinalizarConversacion")]
+        public IActionResult FinalizarConversacion([FromBody] NuevoMensaje userLogin)
+        {
+            if (_authService.ValidateUser(userLogin.Username))
+            {
+                conversaciones.FinalizarConversacion(userLogin);
+                return Ok();
+            }
+            return null;
+
+        }
+
+
+        [HttpPost("Casos")]
+        public IActionResult Casos([FromBody] AvailableMaterial userLogin)
+        {
+            if (_authService.ValidateUser(userLogin.Username))
+            {               
+                return Ok(conversaciones.casos());
+            }
+            return null;
+
+        }
+
+        [HttpPost("CasosFinalizar")]
+        public IActionResult CasosFinalizar([FromBody] AvailableMaterial userLogin)
+        {
+            conversaciones.CasosFinalizar(userLogin.Username);
+            return Ok();
+
+        }
+
+
+
 
         [HttpPost("AvailableMaterial")]
         public IActionResult AvailableMaterial([FromBody] AvailableMaterial userLogin)
