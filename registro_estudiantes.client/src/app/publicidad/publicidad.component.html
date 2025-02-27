@@ -1,0 +1,63 @@
+<div class="container">
+  <!-- Sección Izquierda - Teléfonos -->
+  <div class="section">
+    <h2>📞 Agregar Teléfonos</h2>
+    <div class="input-group">
+      <input type="text" [(ngModel)]="newPhoneNumber" placeholder="Ej. 3001234567" />
+      <button (click)="addPhoneNumber()">Agregar</button>
+    </div>
+
+    <h3>Lista de Teléfonos</h3>
+    <ul *ngIf="phoneNumbers.length > 0">
+      <li *ngFor="let phone of phoneNumbers">{{ phone }}</li>
+    </ul>
+  </div>
+
+  <!-- Sección Derecha - Información de Llamada -->
+  <div class="section">
+    <h2>📢 Configurar Llamada</h2>
+
+    <label>Título de la Campaña</label>
+    <input type="text" [(ngModel)]="title" placeholder="Ej. Promoción de Verano" />
+
+    <label>Guion de Llamada</label>
+    <textarea [(ngModel)]="script" placeholder="Ej. Hola, queremos ofrecerte..."></textarea>
+
+    <h3>📅 Programar Llamadas</h3>
+
+    <div class="date-time-group">
+      <div>
+        <label>Fecha de Inicio</label>
+        <input type="date" [(ngModel)]="callStartDate" />
+      </div>
+      <div>
+        <label>Fecha de Fin</label>
+        <input type="date" [(ngModel)]="callEndDate" />
+      </div>
+    </div>
+
+    <div class="date-time-group">
+      <div>
+        <label>Hora de Inicio</label>
+        <input type="time" [(ngModel)]="callStartTime" />
+      </div>
+      <div>
+        <label>Hora de Fin</label>
+        <input type="time" [(ngModel)]="callEndTime" />
+      </div>
+    </div>
+
+    <h3>🛒 Agregar Productos</h3>
+    <div class="input-group">
+      <input type="text" [(ngModel)]="newProduct" placeholder="Nombre del Producto" />
+      <button (click)="addProduct()">Agregar</button>
+    </div>
+
+    <h3>Productos en la Llamada</h3>
+    <ul *ngIf="products.length > 0">
+      <li *ngFor="let product of products">{{ product }}</li>
+    </ul>
+
+    <button class="call-button" (click)="generateCall()">📞 Generar Llamada</button>
+  </div>
+</div>

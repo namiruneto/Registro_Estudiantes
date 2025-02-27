@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { SubjectDetailsComponent } from '../subject-details/subject-details.component';
+import { Router } from '@angular/router';
 export interface Materia {
   matternId: number;
   name: string;
@@ -25,49 +26,38 @@ export interface MatterRegister {
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  mattern: Materia[] = [];
+  campaigns = [
+    { name: 'Campaña 1', status: 'Activa', startDate: new Date(), calls: 50 },
+    { name: 'Campaña 2', status: 'Pausada', startDate: new Date(), calls: 30 },
+    { name: 'Campaña 3', status: 'Detenida', startDate: new Date(), calls: 20 },
+  ];
 
-  constructor(private httpClient: HttpClient, private authService: AuthService, private dialog: MatDialog) { }
+  activeCampaigns = 0;
+  pausedCampaigns = 0;
+  stoppedCampaigns = 0;
+  totalCalls = 0;
+  recentCampaigns: any[] = [];
 
-  ngOnInit(): void {
-    this.loadSubjects();
+  constructor(private router: Router) { }
+
+  ngOnInit() {
+    this.updateStats();
+    this.recentCampaigns = this.campaigns.slice(0, 3); // Últimas 3 campañas
   }
 
-  loadSubjects(): void {
-    const url = `${environment.apiUrl}/api/Student/SignMattern`;
-    const requestBody = { username: Number(this.authService.getUser()) };
-    this.httpClient.post<Materia[]>(url, requestBody).subscribe(
-      (data) => {
-        console.log(data);
-        this.mattern = data;
-      },
-      (error) => {
-        console.error('Error al cargar materias', error);
-      }
-    );
+  updateStats() {
+    this.activeCampaigns = this.campaigns.filter(c => c.status === 'Activa').length;
+    this.pausedCampaigns = this.campaigns.filter(c => c.status === 'Pausada').length;
+    this.stoppedCampaigns = this.campaigns.filter(c => c.status === 'Detenida').length;
+    this.totalCalls = this.campaigns.reduce((sum, c) => sum + c.calls, 0);
   }
 
-  selectSubject(matterId: number): void {
-    const selectedMatter = this.mattern.find(m => m.matternId === matterId);
-    const url = `${environment.apiUrl}/api/Student/InfoRegisterClass`;
-    const requestBody = { UserId: Number(this.authService.getUser()), MatternId: Number(matterId) };
-    this.httpClient.post<MatterRegister[]>(url, requestBody).subscribe(
-      (response) => {
-        console.log(response);
-        const dataToSend = {
-          matter: selectedMatter,
-          additionalData: response 
-        };
-        this.dialog.open(SubjectDetailsComponent, {
-          width: '600px',
-          height: 'auto',
-          maxHeight: '80vh', 
-          data: dataToSend
-        });
-      },
-      (error) => {
-        alert(error.error.message);
-      }
-    );
+  goToCampaign(campaign: any) {
+    console.log("Ir a detalles de la campaña:", campaign);
+    // Redirigir a la vista de detalles (según cómo manejes las rutas)
+  }
+
+  navigateTo(route: string) {
+    this.router.navigate([route]);
   }
 }

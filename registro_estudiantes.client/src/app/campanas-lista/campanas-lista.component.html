@@ -1,0 +1,78 @@
+<!-- Tabla -->
+<table class="campaigns-table">
+  <thead>
+    <tr>
+      <th>Nombre de Campaña</th>
+      <th>Estado</th>
+      <th>Fecha de Inicio</th>
+      <th>Fecha de Fin</th>
+      <th>Llamadas Realizadas</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let campaign of campaigns">
+      <td>{{ campaign.name }}</td>
+      <td>
+        <span class="status" [ngClass]="{
+          'active': campaign.status === 'Activa',
+          'paused': campaign.status === 'Pausada',
+          'stopped': campaign.status === 'Detenida'
+        }">
+          {{ campaign.status }}
+        </span>
+      </td>
+      <td>{{ campaign.startDate | date:'dd/MM/yyyy' }}</td>
+      <td>{{ campaign.endDate | date:'dd/MM/yyyy' }}</td>
+      <td>{{ getCalledCount(campaign) }} / {{ getEstimatedCalls(campaign) }}</td>
+      <td class="actions">
+        <button *ngIf="campaign.status === 'Pausada' || campaign.status === 'Detenida'"
+                (click)="changeStatus(campaign, 'Activa')"
+                class="action-btn start"
+                title="Iniciar Campaña">
+          <i class="fas fa-play"></i>
+        </button>
+
+        <button *ngIf="campaign.status === 'Activa'"
+                (click)="changeStatus(campaign, 'Pausada')"
+                class="action-btn pause"
+                title="Pausar Campaña">
+          <i class="fas fa-pause"></i>
+        </button>
+
+        <button *ngIf="campaign.status !== 'Detenida'"
+                (click)="changeStatus(campaign, 'Detenida')"
+                class="action-btn stop"
+                title="Detener Campaña">
+          <i class="fas fa-stop"></i>
+        </button>
+
+        <button (click)="verDetalles(campaign)" class="action-btn info" title="Ver Más Información" data-bs-toggle="modal" data-bs-target="#infoModal">
+          <i class="fas fa-info-circle"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="infoModalLabel">Detalles de la Campaña</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>{{ selectedCampaign?.name }}</p>
+        <p>Estado: {{ selectedCampaign?.status }}</p>
+        <p>Fecha de Inicio: {{ selectedCampaign?.startDate | date:'dd/MM/yyyy' }}</p>
+        <p>Fecha de Fin: {{ selectedCampaign?.endDate | date:'dd/MM/yyyy' }}</p>
+        <p>"dlksfbsaljfblsaf2"</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

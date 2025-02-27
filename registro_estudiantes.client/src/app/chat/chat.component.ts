@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-  
+
 interface Contact {
   id: number;
   name: string;
@@ -26,7 +25,9 @@ export class ChatComponent {
     { id: 1, name: 'Juan Pérez', lastMessage: 'Nos vemos mañana' },
     { id: 2, name: 'Ana Gómez', lastMessage: 'Gracias por tu ayuda!' },
     { id: 3, name: 'Carlos Ramírez', lastMessage: '¿Qué tal todo?' }
-  ]; selectedContact: Contact | null = null;
+  ];
+
+  selectedContact: Contact | null = null;
   messages: Message[] = [];
 
   dummyMessages: { [key: number]: Message[] } = {
@@ -53,5 +54,16 @@ export class ChatComponent {
     if (!text.trim() || !this.selectedContact) return;
 
     this.messages.push({ sender: 'Tú', text, timestamp: new Date().toLocaleTimeString() });
+  }
+
+  generateCase() {
+    alert(`Generando caso para ${this.selectedContact?.name}`);
+  }
+
+  endConversation() {
+    if (confirm("¿Seguro que quieres finalizar la conversación?")) {
+      this.messages = [];
+      this.selectedContact = null;
+    }
   }
 }

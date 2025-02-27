@@ -1,16 +1,50 @@
-<section class="materias-container">
-  <div class="card-container">
-    <div class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md" *ngFor="let matter of mattern">
-      <div class="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-blue-600 to-blue-400 text-white shadow-blue-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
-        <div class="initials">
-          {{ matter.name.charAt(0) | uppercase }}
-        </div>
-      </div>
-      <div class="p-4 text-center">       
-        <br />
-        <h4 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">{{ matter.name }}</h4>
-        <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Profesor: {{ matter.nameTeacher }}</p>
-      </div>      
+<div class="dashboard">
+  <!-- Estadísticas Generales -->
+  <div class="stats">
+    <div class="stat-card">
+      <h3>Campañas Activas</h3>
+      <p>{{ activeCampaigns }}</p>
+    </div>
+    <div class="stat-card">
+      <h3>Campañas Pausadas</h3>
+      <p>{{ pausedCampaigns }}</p>
+    </div>
+    <div class="stat-card">
+      <h3>Campañas Detenidas</h3>
+      <p>{{ stoppedCampaigns }}</p>
+    </div>
+    <div class="stat-card">
+      <h3>Total de Llamadas</h3>
+      <p>{{ totalCalls }}</p>
     </div>
   </div>
-</section>
+
+  <!-- Últimas Campañas -->
+  <h2>Últimas Campañas</h2>
+  <table class="campaigns-table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Estado</th>
+        <th>Fecha de Inicio</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let campaign of recentCampaigns">
+        <td>{{ campaign.name }}</td>
+        <td>{{ campaign.status }}</td>
+        <td>{{ campaign.startDate | date:'dd/MM/yyyy' }}</td>
+        <td>
+          <button class="btn-primary" (click)="goToCampaign(campaign)">Ver Más</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Accesos Rápidos -->
+  <div class="quick-actions">
+    <button class="btn-primary" (click)="navigateTo('campaigns')">Ver Campañas</button>
+    <button class="btn-secondary" (click)="navigateTo('new-campaign')">Nueva Campaña</button>
+  </div>
+</div>

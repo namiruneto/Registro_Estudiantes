@@ -23,6 +23,7 @@
     "@angular/platform-server": "^18.0.0",
     "@angular/router": "^18.0.0",
     "@angular/ssr": "^18.0.1",
+    "@fortawesome/fontawesome-free": "^6.7.2",
     "@types/jwt-decode": "^3.1.0",
     "chart.js": "^4.4.7",
     "express": "^4.18.2",

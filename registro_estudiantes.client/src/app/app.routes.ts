@@ -28,6 +28,21 @@ export const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
+        path: 'Publicidad',
+        loadComponent: () => import('./publicidad/publicidad.component').then(m => m.PublicidadComponent),
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'ListadoPublicidad',
+        loadComponent: () => import('./campanas-lista/campanas-lista.component').then(m => m.CampanasListaComponent),
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'Administrativo',
+        loadComponent: () => import('./administrativo/administrativo.component').then(m => m.AdministrativoComponent),
+        canActivate: [AuthGuard]
+      },
+      {
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full'
